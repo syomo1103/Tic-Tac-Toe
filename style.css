@@ -1,0 +1,64 @@
+body {
+  background-color: #6D9D9E !important;
+}
+
+#main-title {
+  font-family: 'Montserrat Subrayada', sans-serif;
+  font-size: 65px;
+  color: white;
+}
+
+#message h3 {
+  font-family: 'Bad Script', cursive;
+  color: white;
+  font-size: 35px;
+}
+
+button.btn.btn-default {
+  background-color: transparent;
+  border-color: white;
+  color: white;
+  font-family: 'Ruda', sans-serif;
+}
+
+button.btn.btn-default:hover {
+  background-color: white;
+  border-color: white;
+  color: #6D9D9E;
+}
+
+.box {
+  height: 100px;
+  width: 100px;
+  border: solid darkgrey 1px;
+  display: inline-block;
+  font-size: 60px;
+  font-family: 'Bad Script', cursive;
+  padding-top: 15px;
+  color: white;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+div.row {
+  margin-left: 225px;
+  margin-right: 100px;
+}
+
+.first-row {
+  border-top: none;
+}
+
+.first-col {
+  border-left: none;
+}
+
+.third-row {
+  border-bottom: none;
+}
+
+.third-col {
+  border-right: none;
+}
