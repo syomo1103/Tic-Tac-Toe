@@ -15,7 +15,7 @@ The technologies used for writing this application include:
 
 ## Getting Started
 
-TBD
+Go start playing, visit https://syomo1103.github.io/Tic-Tac-Toe/
 
 ## Unsolved Issues 
 - Interrupting computer's turn
