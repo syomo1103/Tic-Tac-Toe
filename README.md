@@ -2,7 +2,7 @@
 ![Home page](http://i.imgur.com/HqkC55W.png)
 
 ## Description
-Let's have some fun with Tic-Tac-Toe against your computer. Simplistic design to keep you focused on beating your opponent.  
+Let's have some fun with Tic-Tac-Toe against your computer. Simplistic design to keep you focused on defeating your opponent.  
 
 ## Technologies Used
 
