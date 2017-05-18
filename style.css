@@ -62,3 +62,7 @@ div.row {
 .third-col {
   border-right: none;
 }
+
+@media (max-width: @screen-xs-max) {
+
+}

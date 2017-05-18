@@ -1,35 +1,3 @@
-/*Game Logic
-
-reset game
-  -score = 0
-  -no x's or o's (board reset)
-  -player turn = null
-
-let's play button
-  on click:
-  - randomly pick player
-  - update text to _'s turn
-
-if current player is X
- on click:
-  - update square with same value as player (X)
-  - checkWinner()
-  - switch player turn
-  - update text to O's turn
-
-if current player is O
- on click:
-  - update square with same value as player (O)
-  - checkWinner()
-  - switch player turn
-  - update text to X's turn
-
-check winner
- if value in box is same for 3 consec:
-  - player wins
-  - game over
-*/
-
 $(document).ready(function() {
 
 /*--Variables--*/
@@ -59,6 +27,7 @@ var board = [null, null, null, null, null, null, null, null, null];
   });
 
   $('#reset').on('click', function() {
+    $('.box').addClass('disabled');
     $('#reset').attr('disabled', true);
     $('#start').attr('disabled', false);
 ;    resetGame();
@@ -191,7 +160,6 @@ var board = [null, null, null, null, null, null, null, null, null];
   };
 
   function resetGame() {
-    $('#board').children().find('.box').removeClass('disabled');
     board = [null, null, null, null, null, null, null, null, null];
     winner = null;
     gameOverStatus = false;
@@ -212,5 +180,9 @@ var board = [null, null, null, null, null, null, null, null, null];
         gameOver();
     }
   };
+
+  $(window).resize(function() {
+    $('#board').css('height', window.innerHeight);
+  });
 
 });
