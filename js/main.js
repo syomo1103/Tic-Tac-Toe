@@ -47,38 +47,15 @@ var board = [null, null, null, null, null, null, null, null, null];
 
   $('.box').on('click', function(evt) {
     makeMove(evt);
-
-    // board.forEach(function(item, index) {
-    //   if (item === null) {
-    //     computerArr.push(index);
-    //   }
-    // });
-    // compChoiceIdx = Math.floor((Math.random() * computerArr.length - 1) + 1);
-    // computerArr.forEach(function(item, index) {
-    //   if (index === compChoiceIdx) {
-    //     computerChoice = item;
-    //   }
-    // });
-    // computerArr = [];
-    //checkWinner(evt);
-    //checkCats(evt);
-    // if (gameOverStatus != true) {
-    //   switchPlayer();
-    //   playerMessage();
-    //   computerMove();
-    // }
-    // for(var i = 0; i < board.length; i++) {
-    //   if (board[i] != null) {
-    //     $('#reset').attr('disabled', false);
-    //   };
-    // }
   });
 
   $('#start').on('click', function() {
+    $('.box').removeClass('disabled');
     $('#start').text("Let's Play").attr('disabled', true);
+    $('#reset').attr('disabled', false);
     resetGame();
     pickPlayer();
-    playerMessage();
+    openingMessage();
   });
 
   $('#reset').on('click', function() {
@@ -86,7 +63,12 @@ var board = [null, null, null, null, null, null, null, null, null];
     $('#start').attr('disabled', false);
 ;    resetGame();
   });
+
 /*--Functions--*/
+
+  function openingMessage() {
+    $('#message').html("<h3 id='open-message' style='font-size:25px;' class='text-center'>You're " + currentPlayer + " <br>and you're up first!</h3>");
+  };
 
   function playerMessage() {
     $('#message').html("<h3 class='text-center'>It's " + currentPlayer + "'s turn!</h3>");
@@ -102,7 +84,6 @@ var board = [null, null, null, null, null, null, null, null, null];
   };
 
   function makeMove(evt) {
-    //console.log(computerChoice); logs undefined
     var clickedEl = evt.target;
     var clickedElId = evt.target.id;
     if (currentPlayer === 'O') {
@@ -117,8 +98,8 @@ var board = [null, null, null, null, null, null, null, null, null];
     if (gameOverStatus != true) {
       switchPlayer();
       playerMessage();
+      $('.box').addClass('disabled');
       setTimeout(computerMove, 2000);
-      //computerMove();
     }
   };
 
@@ -135,26 +116,15 @@ var board = [null, null, null, null, null, null, null, null, null];
       }
     });
     computerArr = [];
-    //if (currentPlayer === 'O') {
-     // board[computerChoice] = 'X';
       board[computerChoice] = currentPlayer;
       $('#' + computerChoice).text(currentPlayer).addClass('disabled');
-      //$('#' + computerChoice).text('X');
-      console.log(board);
       checkWinner();
       checkCats();
       if (gameOverStatus != true) {
+        $('.box').removeClass('disabled');
         switchPlayer();
         playerMessage();
       }
-      //switchPlayer();
-      //$(clickedEl).text(currentPlayer).addClass('disabled');
-    // } else if (currentPlayer === 'X') {
-    //   board[computerChoice] = 'O';
-    //   $('#' + computerChoice).text('O');
-    //   console.log(board);
-      //$(clickedEl).text(currentPlayer).addClass('disabled');
-    //}
   };
 
   function switchPlayer() {
@@ -166,7 +136,6 @@ var board = [null, null, null, null, null, null, null, null, null];
   };
 
   function checkWinner(evt) {
-    console.log(currentPlayer);
     if (board[0] === currentPlayer && board[1] === currentPlayer && board[2] === currentPlayer) {
       winner = currentPlayer;
       gameOver();
