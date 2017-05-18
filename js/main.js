@@ -68,32 +68,76 @@ var board = [null, null, null, null, null, null, null, null, null];
       switchPlayer();
       playerMessage();
       $('.box').addClass('disabled');
-      setTimeout(computerMove, 2000);
+      setTimeout(function() {
+        computerMove(evt);
+      }, 1500)
     }
   };
 
-  function computerMove() {
+  function computerMove(evt) {
     board.forEach(function(item, index) {
       if (item === null) {
         computerArr.push(index);
       }
     });
-    compChoiceIdx = Math.floor((Math.random() * computerArr.length - 1) + 1);
-    computerArr.forEach(function(item, index) {
+    clickedElId = evt.target.id;
+    //switch statement to define what's in optionsArr
+    var optionsArr = [];
+    switch (clickedElId) {
+    case '0':
+      optionsArr = [1, 2, 3, 4, 6, 8];
+      break;
+    case '1':
+      optionsArr = [0, 2, 4, 7];
+      break;
+    case '2':
+      optionsArr = [0, 1, 4, 5, 6, 8];
+      break;
+    case '3':
+      optionsArr = [0, 4, 5, 6];
+      break;
+    case '4':
+      optionsArr = [0, 1, 2, 3, 5, 6, 7, 8];
+      break;
+    case '5':
+      optionsArr = [2, 3, 4, 8];
+      break;
+    case '6':
+      optionsArr = [0, 2, 3, 4, 7, 8];
+      break;
+    case '7':
+      optionsArr = [1, 4, 6, 8];
+      break;
+    case '8':
+      optionsArr = [0, 2, 4, 5, 6, 7];
+      break;
+    }
+    var narrowArr = [];
+    for (var i = 0; i < optionsArr.length; i++) {
+      for (var j = 0; j < computerArr.length; j++) {
+        if (optionsArr[i] === computerArr[j]) {
+          narrowArr.push(optionsArr[i]);
+        }
+      }
+    }
+    compChoiceIdx = Math.floor((Math.random() * narrowArr.length - 1) + 1);
+    narrowArr.forEach(function(item, index) {
       if (index === compChoiceIdx) {
         computerChoice = item;
       }
     });
     computerArr = [];
-      board[computerChoice] = currentPlayer;
-      $('#' + computerChoice).text(currentPlayer).addClass('disabled');
-      checkWinner();
-      checkCats();
-      if (gameOverStatus != true) {
-        $('.box').removeClass('disabled');
-        switchPlayer();
-        playerMessage();
-      }
+    optionsArr = [];
+    narrowArr = [];
+    board[computerChoice] = currentPlayer;
+    $('#' + computerChoice).text(currentPlayer).addClass('disabled');
+    checkWinner();
+    checkCats();
+    if (gameOverStatus != true) {
+      $('.box').removeClass('disabled');
+      switchPlayer();
+      playerMessage();
+    }
   };
 
   function switchPlayer() {
@@ -114,7 +158,7 @@ var board = [null, null, null, null, null, null, null, null, null];
     } else if (board[6] === currentPlayer && board[7] === currentPlayer && board[8] === currentPlayer) {
       winner = currentPlayer;
       gameOver();
-    } else if (board[1] === currentPlayer && board[3] === currentPlayer && board[6] === currentPlayer) {
+    } else if (board[0] === currentPlayer && board[3] === currentPlayer && board[6] === currentPlayer) {
       winner = currentPlayer;
       gameOver();
     } else if (board[1] === currentPlayer && board[4] === currentPlayer && board[7] === currentPlayer) {
@@ -181,8 +225,8 @@ var board = [null, null, null, null, null, null, null, null, null];
     }
   };
 
-  $(window).resize(function() {
-    $('#board').css('height', window.innerHeight);
-  });
+  // $(window).resize(function() {
+  //   $('#board').css('height', window.innerHeight);
+  // });
 
 });
