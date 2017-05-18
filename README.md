@@ -17,12 +17,7 @@ The technologies used for writing this application include:
 
 Go start playing, visit https://syomo1103.github.io/Tic-Tac-Toe/
 
-## Unsolved Issues 
-- Interrupting computer's turn
-- On load, user must select Let's Play to begin game
-
 ## Next Steps
-- Fixing unsolved issues
 - Keeping score
-- Creating difficulty levels
+- Creating difficulty levels / increasing complexity
 - Provide option for 2-player or against computer 
