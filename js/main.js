@@ -9,6 +9,8 @@ var winner;
 var gameOverStatus;
 var catsGameStatus;
 var compChoiceIdx;
+var optionsArr;
+var bestArr;
 var board = [null, null, null, null, null, null, null, null, null];
 
 /*--Event Handlers--*/
@@ -75,60 +77,16 @@ var board = [null, null, null, null, null, null, null, null, null];
   };
 
   function computerMove(evt) {
+    var narrowArr = [];
     board.forEach(function(item, index) {
       if (item === null) {
         computerArr.push(index);
       }
     });
-    clickedElId = evt.target.id;
-    //switch statement to define what's in optionsArr
-    var optionsArr = [];
-    switch (clickedElId) {
-    case '0':
-      optionsArr = [1, 2, 3, 4, 6, 8];
-      break;
-    case '1':
-      optionsArr = [0, 2, 4, 7];
-      break;
-    case '2':
-      optionsArr = [0, 1, 4, 5, 6, 8];
-      break;
-    case '3':
-      optionsArr = [0, 4, 5, 6];
-      break;
-    case '4':
-      optionsArr = [0, 1, 2, 3, 5, 6, 7, 8];
-      break;
-    case '5':
-      optionsArr = [2, 3, 4, 8];
-      break;
-    case '6':
-      optionsArr = [0, 2, 3, 4, 7, 8];
-      break;
-    case '7':
-      optionsArr = [1, 4, 6, 8];
-      break;
-    case '8':
-      optionsArr = [0, 2, 4, 5, 6, 7];
-      break;
-    }
-    var narrowArr = [];
-    for (var i = 0; i < optionsArr.length; i++) {
-      for (var j = 0; j < computerArr.length; j++) {
-        if (optionsArr[i] === computerArr[j]) {
-          narrowArr.push(optionsArr[i]);
-        }
-      }
-    }
-    compChoiceIdx = Math.floor((Math.random() * narrowArr.length - 1) + 1);
-    narrowArr.forEach(function(item, index) {
-      if (index === compChoiceIdx) {
-        computerChoice = item;
-      }
-    });
-    computerArr = [];
-    optionsArr = [];
-    narrowArr = [];
+    findOptions(evt);
+    setOptions(narrowArr);
+    pickOption(narrowArr);
+    clearArrays(narrowArr);
     board[computerChoice] = currentPlayer;
     $('#' + computerChoice).text(currentPlayer).addClass('disabled');
     checkWinner();
@@ -139,6 +97,85 @@ var board = [null, null, null, null, null, null, null, null, null];
       playerMessage();
     }
   };
+
+  function findOptions(evt) {
+    clickedElId = evt.target.id;
+    optionsArr = [];
+    bestArr = [];
+    switch (clickedElId) {
+    case '0':
+      bestArr = [1, 3, 4];
+      optionsArr = [2, 6, 8];
+      break;
+    case '1':
+      bestArr = [0, 2, 4];
+      optionsArr = [7];
+      break;
+    case '2':
+      bestArr = [1, 4, 5];
+      optionsArr = [0, 6, 8];
+      break;
+    case '3':
+      bestArr = [0, 4, 6];
+      optionsArr = [5];
+      break;
+    case '4':
+      optionsArr = [0, 1, 2, 3, 5, 6, 7, 8];
+      bestArr = optionsArr;
+      break;
+    case '5':
+      bestArr = [2, 4, 8];
+      optionsArr = [3];
+      break;
+    case '6':
+      bestArr = [3, 4, 7];
+      optionsArr = [0, 2, 8];
+      break;
+    case '7':
+      bestArr = [6, 4, 8];
+      optionsArr = [1];
+      break;
+    case '8':
+      bestArr = [7, 4, 5];
+      optionsArr = [0, 2, 6];
+      break;
+    }
+  }
+
+  function setOptions(narrowArr) {
+    for (var i = 0; i < bestArr.length; i++) {
+      for (var j = 0; j < computerArr.length; j++) {
+        if (bestArr[i] === computerArr[j]) {
+          narrowArr.push(bestArr[i]);
+        }
+      }
+    }
+    if (narrowArr.length === 0) {
+      for (var i = 0; i < optionsArr.length; i++) {
+        for (var j = 0; j < computerArr.length; j++) {
+          if (optionsArr[i] === computerArr[j]) {
+            narrowArr.push(optionsArr[i]);
+          }
+        }
+      }
+      console.log('bestArr results were empty');
+    }
+  };
+
+  function pickOption(narrowArr) {
+    compChoiceIdx = Math.floor((Math.random() * narrowArr.length - 1) + 1);
+    narrowArr.forEach(function(item, index) {
+      if (index === compChoiceIdx) {
+        computerChoice = item;
+      }
+    });
+  }
+
+  function clearArrays(narrowArr) {
+    computerArr = [];
+    optionsArr = [];
+    narrowArr = [];
+  }
 
   function switchPlayer() {
     if (currentPlayer === 'O') {
@@ -224,9 +261,5 @@ var board = [null, null, null, null, null, null, null, null, null];
         gameOver();
     }
   };
-
-  // $(window).resize(function() {
-  //   $('#board').css('height', window.innerHeight);
-  // });
 
 });
