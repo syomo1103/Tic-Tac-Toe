@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #6D9D9E !important;
 }
@@ -6,6 +10,16 @@ body {
   font-family: 'Montserrat Subrayada', sans-serif;
   font-size: 65px;
   color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .box {
+    width: 100%;
+  }
+  #main-title {
+    font-size: 120px;
+    padding-top: 30px;
+  }
 }
 
 #message h3 {
