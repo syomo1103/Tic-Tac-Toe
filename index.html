@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Tic Tac Toe</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat+Subrayada|Ruda" rel="stylesheet">
@@ -12,13 +13,13 @@
 <body class="text-center">
   <h1 id="main-title">Tic Tac Toe</h1>
   <br>
-  <br>
   <div id="top-row" class="row">
-    <div id="buttons" class="col-md-4 col-md-offset-2">
+    <div id="message" class="col-md-4 col-md-offset-2"></div>
+    <!-- <br> -->
+    <div id="buttons" class="col-md-4">
       <p><button class="btn btn-default" id="start">Let's Play</button></p>
       <p><button class="btn btn-default" id="reset">Reset Game</button></p>
     </div>
-    <div id="message" class="col-md-4"></div>
   </div>
   <br>
   <div id="board" class="container">
